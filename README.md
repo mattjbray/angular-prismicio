@@ -21,6 +21,7 @@ First you need to configure the `PrismicProvider`. You can configure the followi
 * Access token if the Master is not open (`setAccessToken`)
 * OAuth (`setClientId`, `setClientSecret`, `setOAuthScope`)
 * Links resolution rules (`setLinkResolver`)
+* Release reference (`setDefaultRef`)
 
 You can configure the `PrismicProvider` in the `config`
 ````javascript
@@ -34,6 +35,7 @@ app.config(function(PrismicProvider) {
     PrismicProvider.setLinkResolver(function(ctx, doc) {
         return 'detail.html?id=' + doc.id + '&slug=' + doc.slug + ctx.maybeRefParam;
     });
+    PrismicProvider.setDefaultRef('');  // Passing `null` (the default) will use the master ref.
 });
 ````
 

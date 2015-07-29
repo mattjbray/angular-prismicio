@@ -45,6 +45,12 @@ angular.module('prismic.io', [])
       object.setOAuthScope = function(oauthScope) {
         config.oauthScope = oauthScope;
       };
+
+      // The default ref to use, if no 'ref' query parameter is present in the URL.
+      config.defaultRef = angular.isUndefined(config.defaultRef) ? null : config.defaultRef;
+      object.setDefaultRef = function(defaultRef) {
+        config.defaultRef = defaultRef;
+      };
     };
 
     var globalConfiguration = {};
@@ -92,6 +98,7 @@ angular.module('prismic.io', [])
         }
 
         function buildContext(ref) {
+          ref = ref || config.defaultRef;
           maybeApi = getApiHome().then(function(api) {
             var context = {
               ref: (ref || api.data.master.ref),
