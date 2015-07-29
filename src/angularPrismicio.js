@@ -47,6 +47,7 @@ angular.module('prismic.io', [])
       };
 
       // The default ref to use, if no 'ref' query parameter is present in the URL.
+      // Can be the label of a ref.
       config.defaultRef = angular.isUndefined(config.defaultRef) ? null : config.defaultRef;
       object.setDefaultRef = function(defaultRef) {
         config.defaultRef = defaultRef;
@@ -100,6 +101,12 @@ angular.module('prismic.io', [])
         function buildContext(ref) {
           ref = ref || config.defaultRef;
           maybeApi = getApiHome().then(function(api) {
+            // Check whether the ref is a label
+            angular.forEach(api.data.refs, function(refItem) {
+              if (refItem.label === ref) {
+                ref = refItem.ref;
+              }
+            });
             var context = {
               ref: (ref || api.data.master.ref),
               api: api,
