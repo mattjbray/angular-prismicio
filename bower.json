@@ -2,7 +2,7 @@
   "name": "angular-prismicio",
   "description": "AngularJS service for prismic.io",
   "version": "0.3.0",
-  "main": "./dist/angular-prismicio.min.js",
+  "main": "./src/angularPrismicio.js",
   "license": "MIT",
   "ignore": [
     "node_modules"
